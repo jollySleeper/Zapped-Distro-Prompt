@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 autoload -Uz vcs_info
 autoload -U colors && colors
@@ -23,6 +23,7 @@ zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:git:*' formats "%F{210}(:%b)%f%{$fg[red]%}%m%u%c"
 
 # Distro Icons
+COLOR="244"
 OS=$(uname -or)
 
 case $OS in
@@ -42,8 +43,9 @@ case $OS in
         arch) ICON="" ;;
         void) ICON="" ;;
         centos) ICON="" ;;
-        ubuntu) ICON="" ;;
-        fedora) ICON="" ;;
+        ubuntu) 
+            ICON=""; COLOR="208" ;;
+        fedora) ICON=""; COLOR="33"  ;;
         alpine) ICON="" ;;
         artix) ICON="" ;;
         gentoo) ICON="" ;;
@@ -75,7 +77,7 @@ case $OS in
 esac
 
 # Prompt
-PROMPT="%F{208}$ICON %f"
+PROMPT="%F{$COLOR}$ICON %f"
 PROMPT+="%{$fg_bold[cyan]%}[ %2~"
 PROMPT+="\$vcs_info_msg_0_"
 PROMPT+="%{$fg_bold[cyan]%}]"
